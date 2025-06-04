@@ -12,7 +12,10 @@ export default defineConfig({
     base: process.env.NODE_ENV === 'production' ? '/diogenes-reader/' : '/',
     publicDir: fileURLToPath(new URL('./src/assets/public/', import.meta.url)),
     plugins: [
-        Aerogel({ name: 'Diogenes Reader' }),
+        Aerogel({
+            name: 'Diogenes Reader',
+            baseUrl: 'https://noeldemartin.github.io/diogenes-reader/',
+        }),
         Components({
             deep: true,
             dts: 'src/types/components.d.ts',
