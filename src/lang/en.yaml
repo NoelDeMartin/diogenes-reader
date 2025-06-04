@@ -1,2 +1,9 @@
 app:
     title: 'Diogenes Reader'
+
+articles:
+    add: Add new article
+    adding: Adding new article...
+    url: Url
+    prompt: Add new article
+    empty: No content.
