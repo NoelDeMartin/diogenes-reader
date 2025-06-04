@@ -1,0 +1,77 @@
+{
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "build": "vite build",
+        "cy:dev": "concurrently --kill-others \"npm run test:serve-app\" \"npm run test:serve-pod\" \"npm run cy:open\"",
+        "cy:open": "cypress open --config-file ./cypress/cypress.config.ts --e2e --browser chromium",
+        "cy:run": "cypress run --config-file ./cypress/cypress.config.ts",
+        "cy:test": "start-server-and-test test:serve-app http-get://localhost:5001 test:serve-pod http-get://localhost:3000 cy:run",
+        "cy:test-snapshots": "docker run -it -u `id -u ${whoami}` -e CYPRESS_SNAPSHOTS=true -v ./:/app -w /app cypress/base:18.16.0 sh -c \"npx cypress install && npm run cy:test\"",
+        "cy:test-snapshots:ci": "docker run -e CYPRESS_SNAPSHOTS=true -v ./:/app -w /app cypress/base:18.16.0 sh -c \"npx cypress install && npm run cy:test\"",
+        "dev": "vite",
+        "dev:serve-pod": "community-solid-server -c @css:config/file.json -f ./solid",
+        "lint": "noeldemartin-lint src cypress",
+        "test": "vitest --run",
+        "test:ci": "vitest --run --reporter verbose",
+        "test:serve-app": "vite --port 5001 --mode testing",
+        "test:serve-pod": "community-solid-server -l warn"
+    },
+    "dependencies": {
+        "@aerogel/core": "^0.1.0",
+        "@aerogel/plugin-i18n": "^0.1.0",
+        "@aerogel/plugin-local-first": "^0.1.0",
+        "@aerogel/plugin-routing": "^0.1.0",
+        "@aerogel/plugin-solid": "^0.1.0",
+        "@aerogel/plugin-soukai": "^0.1.0",
+        "@intlify/unplugin-vue-i18n": "^6.0.5",
+        "@noeldemartin/solid-utils": "^0.6.1",
+        "@noeldemartin/utils": "^0.7.1",
+        "@tailwindcss/forms": "^0.5.10",
+        "@tailwindcss/typography": "^0.5.16",
+        "soukai": "^0.6.1",
+        "soukai-solid": "^0.6.1",
+        "tailwindcss": "^4.1.1",
+        "vue": "^3.5.13",
+        "vue-i18n": "^11.1.2",
+        "vue-router": "^4.5.1"
+    },
+    "devDependencies": {
+        "@aerogel/cli": "^0.1.0",
+        "@aerogel/cypress": "^0.1.0",
+        "@aerogel/vite": "^0.1.0",
+        "@iconify/json": "2.2.341",
+        "@noeldemartin/eslint-config-vue": "next",
+        "@noeldemartin/scripts": "next",
+        "@solid/community-server": "7.1.6",
+        "@total-typescript/ts-reset": "^0.4.2",
+        "@tsconfig/node22": "^22.0.1",
+        "@types/node": "^20.3.1",
+        "@vue/tsconfig": "^0.7.0",
+        "autoprefixer": "^10.4.14",
+        "concurrently": "^8.2.0",
+        "cypress": "14.2.0",
+        "eslint": "^8.57.1",
+        "prettier": "^3.5.3",
+        "prettier-eslint-cli": "^8.0.1",
+        "prettier-plugin-tailwindcss": "^0.6.11",
+        "start-server-and-test": "^2.0.0",
+        "typescript": "^5.8.2",
+        "unplugin-icons": "^22.1.0",
+        "unplugin-vue-components": "^28.4.1",
+        "vite": "^6.2.2",
+        "vitest": "^3.0.9",
+        "vue-tsc": "^2.2.8"
+    },
+    "eslintConfig": {
+        "extends": [
+            "@noeldemartin/eslint-config-vue"
+        ]
+    },
+    "prettier": {
+        "printWidth": 120,
+        "plugins": [
+            "prettier-plugin-tailwindcss"
+        ]
+    }
+}
