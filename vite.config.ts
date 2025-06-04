@@ -9,6 +9,7 @@ import { defineConfig } from 'vitest/config';
 
 export default defineConfig({
     build: { sourcemap: true },
+    base: process.env.NODE_ENV === 'production' ? '/diogenes-reader/' : '/',
     publicDir: fileURLToPath(new URL('./src/assets/public/', import.meta.url)),
     plugins: [
         Aerogel({ name: 'Diogenes Reader' }),
