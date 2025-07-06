@@ -14,7 +14,7 @@
                     <i-majesticons-external-link-line class="size-5" />
                 </Button>
             </div>
-            <div v-if="article.body" v-html="article.body" />
+            <div v-if="article.body" v-safe-html="article.body" />
             <p v-else>
                 {{ $t('articles.empty') }}
             </p>
